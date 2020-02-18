@@ -19,31 +19,34 @@ test driven development!
 try logging instead of print debug
 """
 
-from cards import Cards
-from deck import Deck
+from cards import Cards, Deck
 
 
-def test_deck():
-
+def test_deck_setup():
     """
     RED GREEN REFACTOR 
     a (failing) sanity test layout
     """
     deck = Deck()
     assert len(deck) == 52
-    assert "As" in deck.cards
-    # 'As' == 'Ace of Spades', default syntax for online games
-    assert "6d" in deck.cards
-    assert "Jh" in deck.cards
-    assert "Tc" in deck.cards
-    # '6 of diamonds', 'Jack of hearts', 'Ten of clubs'
-    # assert "6 of Diamonds" in __dir__(cards)
-    # #
+    assert Cards("A", "s") in deck.cards
+    assert Cards("6", "d") in deck.cards
+    assert Cards("J", "h") in deck.cards
+    assert Cards("T", "c") in deck.cards
 
 
-# class Cards:
-#     # dataclass
-#     # suits, ranks
+def test_shuffle_deck():
+    deck_one = Deck(shuffle=True)
+    deck_two = Deck(shuffle=True)
+    deck_three = Deck(shuffle=False)
+    deck_four = Deck(shuffle=False)
+    assert deck_one.cards != deck_two.cards
+    assert deck_three.cards == deck_four.cards
+    deck_copy = deck_one.cards
+    assert deck_copy == deck_one.cards
+    deck_one.shuffle()
+    assert deck_copy != deck_one.cards
+
 
 # class DeckGenerator:
 #     # returns a deck of cards
@@ -60,4 +63,4 @@ def test_deck():
 #     #
 
 # #time logged: 25min
-# # start pom #2 50min []
+# # start pom #2 50min [x]
