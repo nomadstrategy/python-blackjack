@@ -42,10 +42,31 @@ def test_shuffle_deck():
     deck_four = Deck(shuffle=False)
     assert deck_one.cards != deck_two.cards
     assert deck_three.cards == deck_four.cards
-    deck_copy = deck_one.cards
+    deck_copy = [card for card in deck_one.cards]
     assert deck_copy == deck_one.cards
+    print(deck_copy)
+
     deck_one.shuffle()
+    print(deck_one.cards)
     assert deck_copy != deck_one.cards
+
+
+def test_dealing_cards(amount=1):
+    deck = Deck(shuffle=True)
+    test_hand_one = deck.deal(cards=2)
+    test_hand_two = deck.deal(cards=2)
+    assert len(test_hand_one) == 2
+    assert test_hand_one != test_hand_two
+    test_hand_three = deck.deal(cards=47)
+    assert len(test_hand_three) == 47
+    # hand deck exhaustion smoothly
+    test_hand_four = deck.deal(6)
+    assert len(test_hand_four) == 6
+    deck_two = Deck(shuffle=True)
+    deck_three = Deck(shuffle=True)
+    test_hand_two, test_hand_three = deck.deal(2)
+    print(test_hand_two)
+    print(test_hand_three)
 
 
 # class DeckGenerator:

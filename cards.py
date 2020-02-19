@@ -25,6 +25,7 @@ class Deck:
 
     def __init__(self, shuffle=False):
         self.cards = [Cards(rank, suit) for rank in self.RANKS for suit in self.SUITS]
+
         if shuffle:
             self.shuffle()
 
