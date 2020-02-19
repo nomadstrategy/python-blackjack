@@ -47,7 +47,7 @@ def test_Blackjack_logic():
     assert p1.chips == p2.chips
     assert p1.wager == debug_p1_chips
     assert game.bets = sum(p1.wager + p2.wager)
-    
+
 
 
 
@@ -112,6 +112,7 @@ def test_player_setup():
     assert p2.max_stake == 500
     assert p1.max_stake == 100
     assert p2.min_stake == 1
+    assert str(Player) is nice to read
 
 
 def test_player_methods():

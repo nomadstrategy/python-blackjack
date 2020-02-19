@@ -47,9 +47,3 @@ class Deck:
             logging.debug(f"Deck extended to {len(self.cards)} cards")
         return [self.cards.pop(0) for _ in range(cards)]
 
-
-d = Deck(True)
-
-hand = d.deal(cards=2)
-print(hand[0].rank)
-
