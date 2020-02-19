@@ -71,28 +71,32 @@ def test_dealing_cards(amount=1):
 
     print(test_hand_three)
 
+
 def test_player_setup():
     p1 = Player(buyin=100, min_stake=10, max_stake=100)
     p2 = Player(500)
-    assert p1.buyin = 100
-    assert p1.chips = 100
-    assert p1.min_stake = 10
-    assert p2.chips = 500
-    assert p2.max_stake = 500
-    assert p1.max_stake = 100
-    assert p2.min_stake = 1
+    assert p1.buyin == 100
+    assert p1.chips == 100
+    assert p1.min_stake == 10
+    assert p2.chips == 500
+    assert p2.max_stake == 500
+    assert p1.max_stake == 100
+    assert p2.min_stake == 1
+
 
 def test_player_methods():
+    deck = Deck(shuffle=True)
     p1 = Player(500)
     bet = p1.bet(200)
-    assert p1.bet == 200
+    assert p1.wager == 200
+    assert p1.wager == 200
     assert p1.chips == 300
     # who does the pot 'belong to' -- blackjack class
-    card = p1.receive_cards()
-    assert card
-    cards = p1.receive_cards(50)
-    assert len(cards) == 50
-    
+    card = p1.receive_cards(deck)
+    assert p1.hand
+    cards = p1.receive_cards(deck, amount=50)
+    assert len(p1.hand) == 50
+
 
 # class DeckGenerator:
 #     # returns a deck of cards
