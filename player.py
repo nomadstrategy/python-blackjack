@@ -27,21 +27,19 @@ class Player:
         logging.debug(f"${self.chips}")
         return self.wager
 
-    def receive_cards(self, Deck: object, amount=1):
-        """taking in the game deck, add the amount of cards to the
-        player's hand
-        
-        Arguments:
-            Deck {class} -- [game deck object]
-        
-        Keyword Arguments:
-            amount {int} -- [number of cards to receive] (default: {1})
-        """
-        self.hand.append(Deck.deal(amount))
+    # def receive_cards(self, Deck: object, amount=1):
+    #     """taking in the game deck, add the amount of cards to the
+    #     player's hand
+
+    #     Arguments:
+    #         Deck {class} -- [game deck object]
+
+    #     Keyword Arguments:
+    #         amount {int} -- [number of cards to receive] (default: {1})
+    #     """
+    #     self.hand.append(Deck.deal(amount))
+    #     logging.debug(self.hand)
 
     def __str__(self):
         return f"Player '{self.name.capitalize()}' has ${self.chips} in chips."
 
-
-p1 = Player(356)
-print(p1)
