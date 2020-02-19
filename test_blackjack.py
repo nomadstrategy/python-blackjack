@@ -20,6 +20,7 @@ try logging instead of print debug
 """
 
 from cards import Cards, Deck
+from player import Player
 
 
 def test_deck_setup():
@@ -52,6 +53,7 @@ def test_shuffle_deck():
 
 
 def test_dealing_cards(amount=1):
+    # generator for decks?
     deck = Deck(shuffle=True)
     test_hand_one = deck.deal(cards=2)
     test_hand_two = deck.deal(cards=2)
@@ -65,10 +67,32 @@ def test_dealing_cards(amount=1):
     assert len(test_hand_four) == 6
     deck_two = Deck(shuffle=True)
     deck_three = Deck(shuffle=True)
-    test_hand_two, test_hand_three = deck.deal(2)
-    print(test_hand_two)
+    assert deck_two.cards != deck_three.cards
+
     print(test_hand_three)
 
+def test_player_setup():
+    p1 = Player(buyin=100, min_stake=10, max_stake=100)
+    p2 = Player(500)
+    assert p1.buyin = 100
+    assert p1.chips = 100
+    assert p1.min_stake = 10
+    assert p2.chips = 500
+    assert p2.max_stake = 500
+    assert p1.max_stake = 100
+    assert p2.min_stake = 1
+
+def test_player_methods():
+    p1 = Player(500)
+    bet = p1.bet(200)
+    assert p1.bet == 200
+    assert p1.chips == 300
+    # who does the pot 'belong to' -- blackjack class
+    card = p1.receive_cards()
+    assert card
+    cards = p1.receive_cards(50)
+    assert len(cards) == 50
+    
 
 # class DeckGenerator:
 #     # returns a deck of cards

@@ -50,6 +50,6 @@ class Deck:
 
 d = Deck(True)
 
-hand = d.deal(1262)
-print(hand)
+hand = d.deal(cards=2)
+print(hand[0].rank)
 
