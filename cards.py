@@ -1,4 +1,7 @@
+import logging
 from dataclasses import dataclass
+
+logging.basicConfig(level=logging.DEBUG)
 
 
 @dataclass
@@ -12,8 +15,8 @@ class Cards:
 
 
 class Deck:
-    """
-    builds standard 52 card deck of cards 
+    """ 
+        builds standard 52 card deck of cards 
         a hand:
         ['Ac', 'Th', '2s', '9c']
         contains:
@@ -37,10 +40,16 @@ class Deck:
     def __len__(self):
         return len(self.cards)
 
+    def deal(self, cards=1):
+        while cards > len(self.cards):
+            logging.debug(f"{cards} requested exceeds deck length of {len(self.cards)}")
+            self.cards.extend(Deck().cards)
+            logging.debug(f"Deck extended to {len(self.cards)} cards")
+        return [self.cards.pop(0) for _ in range(cards)]
+
 
 d = Deck(True)
 
-print(d.cards[0].rank)
-
-print(d.cards)
+hand = d.deal(1262)
+print(hand)
 

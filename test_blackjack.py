@@ -57,8 +57,9 @@ def test_dealing_cards(amount=1):
     test_hand_two = deck.deal(cards=2)
     assert len(test_hand_one) == 2
     assert test_hand_one != test_hand_two
-    test_hand_three = deck.deal(cards=47)
-    assert len(test_hand_three) == 47
+    test_hand_three = deck.deal(cards=1384)
+    assert len(test_hand_three) == 1384
+    print(test_hand_three)
     # hand deck exhaustion smoothly
     test_hand_four = deck.deal(6)
     assert len(test_hand_four) == 6
@@ -85,3 +86,5 @@ def test_dealing_cards(amount=1):
 
 # #time logged: 25min
 # # start pom #2 50min [x]
+# pom #3 75 min [x]
+# pom #4 100 min []
