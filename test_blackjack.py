@@ -24,13 +24,33 @@ from player import Player
 from pyblackjack import Blackjack
 
 
-def test_Blackjack_logic():
+def test_Blackjack_registration():
+
     p1 = Player(buyin=1000, min_stake=1, max_stake=1000, name="Rainman")
     p2 = Player(300)
 
     game = Blackjack(p1, p2, shoes=6)
     # assert game.players has p1 and p2 maybe as dict keys with info and hands
     # assert game.players.p1.hand != game.players.p2.hand
+    assert p1.min_stake == 1
+    assert p2.buyin == 300
+    assert p1.max_stake == 1000
+    assert p2.max_stake == None
+    assert p1.hand == []
+
+
+def test_Blackjack_sanity():
+    p1 = Player(1000)
+    p2 = Player(525)
+    game = Blackjack(p1, p2)
+    assert len(game.deck) == game.shoes * 52
+
+
+def test_Blackjack_players():
+    p1 = Player(buyin=1000, min_stake=1, max_stake=1000, name="Rainman")
+    p2 = Player(300)
+    game = Blackjack(p1, p2, shoes=6)
+
     game.deal_cards(p1, p2)
 
     # TODO: better syntax for calling hands, name ref or ?
@@ -38,15 +58,16 @@ def test_Blackjack_logic():
 
     assert game.players[0].chips == 1000
     assert game.players[1].chips == 300
-    assert len(game.deck) == game.shoes * 52
-    debug_p1_chips = (p1.chips,)
-    logging.debug(debug_p1_chips)
-    b3 = Blackjack(shoes=6)
-    assert len(b3) == 6 * 52
     p1.bet(p1.chips)
     p2.bet(p2.chips)
     assert p1.chips == p2.chips
-    assert p1.wager == debug_p1_chips
+    # TODO: p1.wager(250) --> doesn't reg with
+    # blackjack class, blackjack.wager should set?
+    game.take_bets()
+    # WARNING: inputting 250 here to pass..
+    # TODO: REFACTOR TEST TO AVOID INPUT
+    assert p1.wager == 250
+    assert p2.wager == 250
     assert game.bets == p1.wager + p2.wager
 
 
@@ -114,6 +135,7 @@ def test_player_setup():
 
 
 def test_player_methods():
+
     deck = Deck(shuffle=True)
     p1 = Player(500)
     p2 = Player(8000)
@@ -123,13 +145,6 @@ def test_player_methods():
     assert p1.wager == 200
     assert p1.wager == 200
     assert p1.chips == 300
-    # who does the pot 'belong to' -- blackjack class
-    # card = p1.receive_cards(deck)
-
-    assert p1.hand
-    # cards = p2.receive_cards(deck, amount=50)
-    print(f"P2 hand: {p2.hand} \n has {len(p2.hand)} cards")
-    # assert len(p2.hand) == 50
 
 
 # SECTION NOTES:
