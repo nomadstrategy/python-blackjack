@@ -23,9 +23,9 @@ class Player:
         return Player(buyin, min_stake=min_stake, max_stake=max_stake, name=playername)
 
     def topup(self, amount):
-        logging.debug(f"old chipstack: ${self.chips}; adding ${amount}")
+        # logging.debug(f"old chipstack: ${self.chips}; adding ${amount}")
         self.chips += amount
-        logging.debug(f"new chipstack: ${self.chips}")
+        # logging.debug(f"new chipstack: ${self.chips}")
 
     def check_bet_legality(self):
         def legal_bet(self, amount):
@@ -48,31 +48,13 @@ class Player:
     def bet(self, amount):
         # TODO: decorator: amount <= self.max_bet
         self.wager = amount
-        print(f"amount: {amount} -- wager : ${self.wager}")
-        logging.warning(f"${amount} wager: chipstack before: ${self.chips}")
-        logging.warning(f"${self.wager} being deducted")
+        print(f"{self.name} is betting ${self.wager}")
+        # logging.warning(f"${amount} wager: chipstack before: ${self.chips}")
+        # logging.warning(f"${self.wager} being deducted")
         self.chips -= amount
-        logging.warning(f"${self.chips}")
+        # logging.warning(f"${self.chips}")
         return self.wager
-
-    # def receive_cards(self, Deck: object, amount=1):
-    #     """taking in the game deck, add the amount of cards to the
-    #     player's hand
-
-    #     Arguments:
-    #         Deck {class} -- [game deck object]
-
-    #     Keyword Arguments:
-    #         amount {int} -- [number of cards to receive] (default: {1})
-    #     """
-    #     self.hand.append(Deck.deal(amount))
-    #     logging.debug(self.hand)
 
     def __str__(self):
         return f"Player '{self.name.capitalize()}' has ${self.chips} in chips."
 
-
-p1 = Player(500, max_stake=100)
-
-p1.bet(100)
-print(p1.wager)

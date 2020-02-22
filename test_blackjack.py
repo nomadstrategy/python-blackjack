@@ -25,24 +25,20 @@ from pyblackjack import Blackjack
 
 
 def test_Blackjack_logic():
-    d = Deck()
     p1 = Player(buyin=1000, min_stake=1, max_stake=1000, name="Rainman")
     p2 = Player(300)
 
-    # game1 = Blackjack()
-    # put in parameters? ^ for the players? probably yes..
-    # if __name__ == 'pyblackjack':
-    # get_info
-    # game = Blackjack(user_info_start)
     game = Blackjack(p1, p2, shoes=6)
     # assert game.players has p1 and p2 maybe as dict keys with info and hands
     # assert game.players.p1.hand != game.players.p2.hand
     game.deal_cards(p1, p2)
-    assert game.p1.hand
 
-    assert game.players.p1.chips == 1000
-    assert game.players.p2.chips == 300
-    assert len(game.shoe) == shoes * 52
+    # TODO: better syntax for calling hands, name ref or ?
+    assert game.players[0].hand
+
+    assert game.players[0].chips == 1000
+    assert game.players[1].chips == 300
+    assert len(game.deck) == game.shoes * 52
     debug_p1_chips = (p1.chips,)
     logging.debug(debug_p1_chips)
     b3 = Blackjack(shoes=6)

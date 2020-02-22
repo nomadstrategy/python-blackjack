@@ -8,11 +8,11 @@ logging.basicConfig(level=logging.DEBUG)
 class Blackjack:
     # def __init__(self, *args, **kwargs):
     def __init__(self, *Players, shoes=6, min_wager=None, max_wager=None):
-        self.players = Players
-        logging.debug(self.players)
+        self.players = list(Players)
+        # logging.debug(self.players)
         self.bets = None
         self.shoes = shoes
-        self.deck = Deck(shuffle=True)
+        self.deck = Deck(shuffle=True, amount=shoes)
         self.min_wager = min_wager
         self.max_wager = max_wager
         # bets = {'player_one': 100, 'p2': 55}
@@ -23,7 +23,7 @@ class Blackjack:
             self.deck = Deck(shuffle=True)
 
         for player in Players:
-            player.hand.append(self.deck.deal(amount))
+            player.hand.extend(self.deck.deal(amount))
 
     def __str__(self):
         return f"""
@@ -46,9 +46,12 @@ class Blackjack:
 game_deck = Deck()
 player_one = Player(5000)
 player_two = Player(333, name="Joei")
-test_game = Blackjack(player_one, player_two, shoes=6)
-print(test_game)
+game = Blackjack(player_one, player_two, shoes=6)
+# print(game)
 
-test_game.deal_cards(player_one)
-print(player_one.hand)
+# game.deal_cards(player_one, player_two, amount=2)
+
+# for player in game.players:
+#     print(player.name)
+#     print(player.hand)
 

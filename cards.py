@@ -27,12 +27,15 @@ class Deck:
     SUITS = "c d h s".split()
 
     def __init__(self, shuffle=False, amount=1):
-        self.cards = [Cards(rank, suit) for rank in self.RANKS for suit in self.SUITS]
+        self.cards = [
+            Cards(rank, suit) for rank in self.RANKS for suit in self.SUITS
+        ] * amount
 
         if shuffle:
             self.shuffle()
 
     def shuffle(self):
+        """SIMULATION ONLY: not truly random"""
         import random
 
         random.shuffle(self.cards)
@@ -42,8 +45,11 @@ class Deck:
 
     def deal(self, cards=1):
         while cards > len(self.cards):
-            logging.debug(f"{cards} requested exceeds deck length of {len(self.cards)}")
+            # logging.debug(f"{cards} requested exceeds deck length of {len(self.cards)}")
             self.cards.extend(Deck().cards)
-            logging.debug(f"Deck extended to {len(self.cards)} cards")
+            # logging.debug(f"Deck extended to {len(self.cards)} cards")
         return [self.cards.pop(0) for _ in range(cards)]
+
+    def __str__(self):
+        return f"{len(self)} cards: \n{self.cards}"
 
