@@ -26,7 +26,7 @@ class Deck:
     RANKS = "2 3 4 5 6 7 8 9 T J Q K A".split()
     SUITS = "c d h s".split()
 
-    def __init__(self, shuffle=False):
+    def __init__(self, shuffle=False, amount=1):
         self.cards = [Cards(rank, suit) for rank in self.RANKS for suit in self.SUITS]
 
         if shuffle:

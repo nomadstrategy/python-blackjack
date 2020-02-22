@@ -23,34 +23,35 @@ from cards import Cards, Deck
 from player import Player
 from pyblackjack import Blackjack
 
+
 def test_Blackjack_logic():
     d = Deck()
-    p1 = Player(buyin=1000, min_stake=1, max_stake=1000, name='Rainman')
+    p1 = Player(buyin=1000, min_stake=1, max_stake=1000, name="Rainman")
     p2 = Player(300)
 
     # game1 = Blackjack()
     # put in parameters? ^ for the players? probably yes..
-    # if __name__ == 'pyblackjack': 
+    # if __name__ == 'pyblackjack':
     # get_info
     # game = Blackjack(user_info_start)
     game = Blackjack(p1, p2, shoes=6)
-    assert game.players has p1 and p2 maybe as dict keys with info and hands
-    assert game.players.p1.hand is not game.players.p2.hand
+    # assert game.players has p1 and p2 maybe as dict keys with info and hands
+    # assert game.players.p1.hand != game.players.p2.hand
+    game.deal_cards(p1, p2)
+    assert game.p1.hand
+
     assert game.players.p1.chips == 1000
     assert game.players.p2.chips == 300
-    assert len(game.shoe) == shoes*52
-    debug_p1_chips = p1.chips,
+    assert len(game.shoe) == shoes * 52
+    debug_p1_chips = (p1.chips,)
     logging.debug(debug_p1_chips)
-
+    b3 = Blackjack(shoes=6)
+    assert len(b3) == 6 * 52
     p1.bet(p1.chips)
     p2.bet(p2.chips)
     assert p1.chips == p2.chips
     assert p1.wager == debug_p1_chips
-    assert game.bets = sum(p1.wager + p2.wager)
-
-
-
-
+    assert game.bets == p1.wager + p2.wager
 
 
 def test_deck_setup():
@@ -112,7 +113,8 @@ def test_player_setup():
     assert p2.max_stake == 500
     assert p1.max_stake == 100
     assert p2.min_stake == 1
-    assert str(Player) is nice to read
+    # assert str(Player) is nice to read
+    # new_player = Player.register_player()
 
 
 def test_player_methods():
@@ -120,11 +122,14 @@ def test_player_methods():
     p1 = Player(500)
     p2 = Player(8000)
     bet = p1.bet(200)
+    print(p1.bet)
+    print(p1.wager)
     assert p1.wager == 200
     assert p1.wager == 200
     assert p1.chips == 300
     # who does the pot 'belong to' -- blackjack class
     # card = p1.receive_cards(deck)
+
     assert p1.hand
     # cards = p2.receive_cards(deck, amount=50)
     print(f"P2 hand: {p2.hand} \n has {len(p2.hand)} cards")
