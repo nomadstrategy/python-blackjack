@@ -9,7 +9,6 @@ class Blackjack:
     # TODO: del Player if bust?
     def __init__(self, *Players, shoes=6, min_wager=None, max_wager=None):
         self.players = list(Players)
-        # logging.debug(self.players)
         self.shoes = shoes
         self.deck = Deck(shuffle=True, amount=shoes)
         self.min_wager = min_wager
@@ -43,13 +42,6 @@ class Blackjack:
         """
 
 
-# # def setup_game():
-# #     playername = input('Name? : ')
-# #     buyin = int(input('Enter buyin amount: $'))
-# #     max_stake = int(input('Enter your max stake per bet: $'))
-# #     min_stake = max_stake/100
-# #     return Player(buyin, max_stake=max_stake, name=playername)
-
 # # register = setup_game()
 # game_deck = Deck()
 # player_one = Player(5000)
@@ -67,6 +59,30 @@ class Blackjack:
 
 # game.take_bets()
 
-p = Player(100, "Joe")
 
-print(p)
+def main():
+    """ sloppy implementation of game logic """
+    print("Welcome to Blackjack!")
+    dealer = Player(buyin=1_000_000_000, name="Dealer")
+    players = {}
+    print("Registering players! Take your seats.")
+    # player_one = Player.register_player()
+    # # TODO: refactor this!
+    # prompt = input("Seat another player? [Y]es, [N]o")
+    # if prompt.upper() != "Y":
+    #     pass
+    # else:
+    #     player_two = Player.register_player()
+
+    players["one"] = Player.register_player()
+    for i, player in enumerate(range(6)):
+        prompt = input("Seat another player? [Y]es, [N]o")
+        if prompt.upper() != "Y":
+            break
+        else:
+            players[str(i)] = Player.register_player()
+    logging.debug(players.items())
+
+
+if __name__ == "__main__":
+    main()
