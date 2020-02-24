@@ -6,7 +6,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 
 class Blackjack:
-    # def __init__(self, *args, **kwargs):
+    # TODO: del Player if bust?
     def __init__(self, *Players, shoes=6, min_wager=None, max_wager=None):
         self.players = list(Players)
         # logging.debug(self.players)
@@ -67,3 +67,6 @@ class Blackjack:
 
 # game.take_bets()
 
+p = Player(100, "Joe")
+
+print(p)

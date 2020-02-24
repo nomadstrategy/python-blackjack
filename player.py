@@ -14,7 +14,7 @@ class Player:
         self.hand = []
         self.wager = 0
 
-    @staticmethod
+    @staticmethod  # TODO: class method? blackjack namespace? module level?
     def register_player():
         playername = input("Name? : ")
         buyin = int(input("Enter buyin amount: $"))
