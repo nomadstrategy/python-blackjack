@@ -33,7 +33,7 @@ def test_Blackjack_sanity():
 
 def test_Blackjack_players():
     p1 = Player(buyin=1000, min_stake=1, max_stake=1000, name="Rainman")
-    assert p1.name == "Joe"
+    assert p1.name == "Rainman"
 
     p2 = Player(300)
     assert p2.chips == 300

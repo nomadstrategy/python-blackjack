@@ -45,16 +45,32 @@ class Player:
         return legal_bet
 
     # @check_bet_legality
-    def bet(self, amount):
+    def bet(self, amount: int):
         # TODO: decorator: amount <= self.max_bet
-        self.wager = amount
-        print(f"{self.name} is betting ${self.wager}")
-        # logging.warning(f"${amount} wager: chipstack before: ${self.chips}")
-        # logging.warning(f"${self.wager} being deducted")
-        self.chips -= amount
-        # logging.warning(f"${self.chips}")
-        return self.wager
+        if amount > self.chips:
+            raise Exception(
+                f"Your bet of ${amount} is greater than your balance of ${self.min_stake}! Topup or reduce bet."
+            )
+        elif amount < self.min_stake:
+            raise Exception(
+                f"Your bet of ${amount} is under your minimum allowed bet of ${self.min_stake}"
+            )
+        elif self.max_stake and amount > self.max_stake:
+            raise Exception(
+                f"Your bet of ${amount} is over your maximum allowed bet of ${self.max_stake}"
+            )
+        else:
+            self.wager = amount
+            print(f"{self.name} is betting ${self.wager}")
+
+            self.chips -= amount
+
+            return self.wager
 
     def __str__(self):
         return f"Player '{self.name.capitalize()}' has ${self.chips} in chips."
 
+
+# p = Player(500)
+
+# p.bet(5000)
