@@ -7,8 +7,8 @@ logging.basicConfig(level=logging.DEBUG)
 
 class Blackjack:
     # TODO: del Player if bust?
-    def __init__(self, *Players, shoes=6, min_wager=None, max_wager=None):
-        self.players = list(Players)
+    def __init__(self, shoes=6, min_wager=1, max_wager=1_000_000, **Players):
+        self.players = Players
         self.shoes = shoes
         self.deck = Deck(shuffle=True, amount=shoes)
         self.min_wager = min_wager
@@ -18,11 +18,11 @@ class Blackjack:
 
     def take_bets(self):
         for player in self.players:
+            logging.debug(type(self.players[player]))
             wager = int(input("Enter your bet: $"))
-            player.bet(wager)
-            self.bets += player.wager
-
-        # self.bets = {player.name: player.wager for player in Players}
+            logging.debug(type(self.players["Player #1"]))
+            self.players[player].bet(wager)
+            self.bets += self.players[player].wager
 
     def deal_cards(self, *Players, amount=1):
         if not self.deck:
@@ -42,27 +42,10 @@ class Blackjack:
         """
 
 
-# # register = setup_game()
-# game_deck = Deck()
-# player_one = Player(5000)
-# player_two = Player(333, name="Joei")
-# game = Blackjack(player_one, player_two, shoes=6)
-# # print(game)
-
-# game.deal_cards(player_one, player_two, amount=2)
-
-# for player in game.players:
-#     print(player.name)
-#     print(player.hand)
-
-# print(game.bets)
-
-# game.take_bets()
-
-
 def main():
     """ sloppy implementation of game logic """
     print("Welcome to Blackjack!")
+
     dealer = Player(buyin=1_000_000_000, name="Dealer")
     players = {}
     print("Registering players! Take your seats.")
@@ -74,14 +57,20 @@ def main():
     # else:
     #     player_two = Player.register_player()
 
-    players["one"] = Player.register_player()
-    for i, player in enumerate(range(6)):
-        prompt = input("Seat another player? [Y]es, [N]o")
-        if prompt.upper() != "Y":
-            break
-        else:
-            players[str(i)] = Player.register_player()
-    logging.debug(players.items())
+    # for i, player in enumerate(range(6)):
+    #     prompt = input("Seat a player? [Y]es, [N]o")
+    #     if prompt.upper() != "Y":
+    #         break
+    #     else:
+    #         players["player #" + str(i + 1)] = Player.register_player()
+
+    players["Player #1"] = Player(100, max_stake=50, name="Rainman")
+
+    # TODO: remove this palceholder ^
+
+    blackjack = Blackjack(shoes=6, **players)
+
+    blackjack.take_bets()
 
 
 if __name__ == "__main__":

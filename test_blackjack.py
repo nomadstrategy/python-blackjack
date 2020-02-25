@@ -24,6 +24,17 @@ from player import Player
 from pyblackjack import Blackjack
 
 
+def test_main_blackjack():
+    dealer = Player(buyin=1_000_000_000, name="Dealer")
+    blackjack = Blackjack(shoes=6, Players=Player(100, "Joe"))
+    assert blackjack.players["Joe"]
+    assert blackjack.players["Dealer"]
+    assert blackjack.shoes == 6
+    assert len(blackjack.deck) == blackjack.shoes * 52
+    assert blackjack.players["Joe"].name == "Joe"
+    assert blackjack.players["Dealer"].name == "Dealer"
+
+
 def test_Blackjack_sanity():
     p1 = Player(1000)
     p2 = Player(525)

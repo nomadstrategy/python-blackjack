@@ -53,7 +53,7 @@ class Player:
         return f"Player '{self.name.capitalize()}' has ${self.chips} in chips."
 
     def __repr__(self):
-        return f"Player(self.buyin, self.min_stake, self.max_stake, self.name)"
+        return f"Player({self.buyin}, {self.min_stake}, {self.max_stake}, {self.name})"
 
 
 # p = Player(500)
